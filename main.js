@@ -2,6 +2,8 @@
 
 const scribble = require('scribbletune');
 
+var engine = new (require('./RMMEngine')).RMMEngine();
+
 
 // Get alternate notes from the C Phrygian mode
 var notes = scribble.mode('c', 'phrygian').filter((x, i) => i % 2 === 0);
