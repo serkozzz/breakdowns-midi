@@ -3,15 +3,15 @@
 function BaseEngine()
 {
 	/**
-	 * Creates and return sequence. Sequence`s notes are fractional numbers(portion of 4/4bar, it corresponds to the generally accepted duration of notes).
-	 * Negative number means pause, positive - note.
+	*   Creates and return sequence. Each note is present as vector2 - [startPoint, duration]
+	*   Duration is a fractional number(portion of 4/4bar - it corresponds to the generally accepted duration of notes - for example 1/8 accords eighth note etc).
 	*	@param {Array} size: [4, 4] or [3, 4] etc
 	*   @param {int} barsCount: barsCount
- 	* 	@returns {Object} : {
-	*		kick : [1/4, 1/8, 1/8, 1/4, 1/16, 1/16, 1/8],	
-	*		snare : [-3/8, 1/8, 1/8, -3/8 ],
-	*		hat : [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
-	* 		guitart : [....]
+	* 	@returns {Object} : {
+	*		kick : [ [0, 1/4], [1/4, 1/8], [3/8, 1/4], [5/8, 1/16], [11/16, 1/16],  [3/4, 1/8] ],	
+	*		snare : [ [3/8, 1/8], [4/8, 1/8] ],
+	*		hat : [ [0.125, 0.125], [0.25, 0.125], [0.375, 0.125], [0.5, 0.125], [0.625, 0.125], [0.75, 0.125], [0.875, 0.125] ],
+	* 		guitar : [....],
 	*		guitar_muted : [....]
 	* 	}
 	*/
