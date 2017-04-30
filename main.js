@@ -1,8 +1,15 @@
 'use strict';
 
-const scribble = require('scribbletune');
 
 var engine = new (require('./RMMEngine')).RMMEngine();
+var adapter = new (require('./EngineToGlasgowAdapter')).EngineToGlasgowAdapter();
 
-var sequence = engine.GenerateSequence([4, 4], 1);
+
+function adaptEngineSequenceForGlasgow(sequence) {
+
+}
+
+var sequence = engine.GenerateSequence([4, 4], 2);
+adapter.adapt(sequence);
+
 console.log(JSON.stringify(sequence));

@@ -18,7 +18,7 @@ function BaseEngine()
 	this.GenerateSequence = function(size, barsCount) {
 		var bars = (barsCount) ? barsCount : 1;
 		var barDuration = size[0] / size[1];
-		var sequence = [];
+		var sequence = {kick: [], snare : [], crash: [], guitar_open : [], guitar_muted : []};
 
 		for (var i = 0; i < barsCount; i++) {
 		
@@ -28,9 +28,9 @@ function BaseEngine()
 				for (var j = 0; j < instrumentNotes.length; j++ ) {
 					instrumentNotes[j][0] = instrumentNotes[j][0] + i * barDuration;
 				}
+				sequence[key] = sequence[key].concat(newBar[key]);
 			}
-			sequence = sequence.concat(newBar);
-		
+
 		}
 		return sequence;
 	}
@@ -38,12 +38,6 @@ function BaseEngine()
 	this._generateBar = function(size) {
 		return null;
 	}
-
-	this.MIDI_CODE_KICK = 24;
-	this.MIDI_CODE_SNARE = 26;
-	this.MIDI_CODE_CRASH = 65;
-	this.MIDI_CODE_OPEN_GUITAR = 12;
-	this.MIDI_CODE_MUTED_GUITAR = 13;
 }
 
 
