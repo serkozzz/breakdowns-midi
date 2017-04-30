@@ -1,6 +1,6 @@
 'use strict'
 
-
+//glasgow github https://github.com/asb2m10/glasgow
 
 function EngineToGlasgowAdapter() {
     
@@ -12,16 +12,19 @@ function EngineToGlasgowAdapter() {
         "guitar_muted" : 13,
     }
 
-    this.adapt = function(sequence) {
+    this.getAdaptedSequence = function(sequence) {
+
+        var result = [];
         for ( var key in sequence) {
-            var midiCode = midiCodes[key];
+            var midiCode = midiCodes[key] + 12; // apparently glasgow shifts one octave down, + 12 is compensation
             var velocity = 120;
 
             var instrSequence = sequence[key];
             for (var i = 0; i < instrSequence.length; i ++) {
-                instrSequence[i] = [instrSequence[i][0] * 4, midiCode, velocity, instrSequence[i][1]];
+                result.push([instrSequence[i][0] * 4, midiCode, velocity, instrSequence[i][1]]);
             }
         }
+        return result;
     }
 
 }
