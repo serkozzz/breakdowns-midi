@@ -10,16 +10,27 @@ function BaseEngine()
 	* 	@returns {Object} : {
 	*		kick : [ [0, 1/4], [1/4, 1/8], [3/8, 1/4], [5/8, 1/16], [11/16, 1/16],  [3/4, 1/8] ],	
 	*		snare : [ [3/8, 1/8], [4/8, 1/8] ],
-	*		hat : [ [0.125, 0.125], [0.25, 0.125], [0.375, 0.125], [0.5, 0.125], [0.625, 0.125], [0.75, 0.125], [0.875, 0.125] ],
-	* 		guitar : [....],
+	*		crash : [ [0.125, 0.125], [0.25, 0.125], [0.375, 0.125], [0.5, 0.125], [0.625, 0.125], [0.75, 0.125], [0.875, 0.125] ],
+	* 		guitar_open : [....],
 	*		guitar_muted : [....]
 	* 	}
 	*/
 	this.GenerateSequence = function(size, barsCount) {
 		var bars = (barsCount) ? barsCount : 1;
+		var barDuration = size[0] / size[1];
 		var sequence = [];
+
 		for (var i = 0; i < barsCount; i++) {
-			sequence = sequence.concat(this._generateBar(size));
+		
+			var newBar = this._generateBar(size);
+			for( key in newBar ) {
+				var instrumentNotes = newBar[key];
+				for (var j = 0; j < instrumentNotes.length; j++ ) {
+					instrumentNotes[j][0] = instrumentNotes[j][0] + i * barDuration;
+				}
+			}
+			sequence = sequence.concat(newBar);
+		
 		}
 		return sequence;
 	}
@@ -27,6 +38,12 @@ function BaseEngine()
 	this._generateBar = function(size) {
 		return null;
 	}
+
+	this.MIDI_CODE_KICK = 24;
+	this.MIDI_CODE_SNARE = 26;
+	this.MIDI_CODE_CRASH = 65;
+	this.MIDI_CODE_OPEN_GUITAR = 12;
+	this.MIDI_CODE_MUTED_GUITAR = 13;
 }
 
 
